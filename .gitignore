@@ -1,4 +1,3 @@
-.vscode
 __pycache__
 venv
 
@@ -13,3 +12,4 @@ ehthumbs.db
 Thumbs.db
 
 .github/**
+frontend/node_modules

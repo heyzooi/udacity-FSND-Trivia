@@ -35,13 +35,13 @@ def create_app(test_config=None):
             abort(400, 'content_type header charset is not utf-8')
 
     '''
-    @TODO: Set up CORS. Allow '*' for origins. Delete the sample route after
+    @DONE: Set up CORS. Allow '*' for origins. Delete the sample route after
     completing the TODOs
     '''
     CORS(app, resources={r"/*": {"origins": "*"}})
 
     '''
-    @TODO: Use the after_request decorator to set Access-Control-Allow
+    @DONE: Use the after_request decorator to set Access-Control-Allow
     '''
     @app.after_request
     def after_request(response):
@@ -53,7 +53,7 @@ def create_app(test_config=None):
         return response
 
     '''
-    @TODO:
+    @DONE:
     Create an endpoint to handle GET requests
     for all available categories.
     '''
@@ -65,7 +65,7 @@ def create_app(test_config=None):
         })
 
     '''
-    @TODO:
+    @DONE:
     Create an endpoint to handle GET requests for questions,
     including pagination (every 10 questions).
     This endpoint should return a list of questions,
@@ -101,7 +101,7 @@ def create_app(test_config=None):
         })
 
     '''
-    @TODO:
+    @DONE:
     Create an endpoint to DELETE question using a question ID.
 
     TEST: When you click the trash icon next to a question, the question will
@@ -115,7 +115,7 @@ def create_app(test_config=None):
         return jsonify(question.format())
 
     '''
-    @TODO:
+    @DONE:
     Create an endpoint to POST a new question,
     which will require the question and answer text,
     category, and difficulty score.
@@ -162,7 +162,7 @@ def create_app(test_config=None):
             abort(422, str(error))
 
     '''
-    @TODO:
+    @DONE:
     Create a POST endpoint to get questions based on a search term.
     It should return any questions for whom the search term
     is a substring of the question.
@@ -178,7 +178,7 @@ def create_app(test_config=None):
         return questions(searchTerm=searchTerm)
 
     '''
-    @TODO:
+    @DONE:
     Create a GET endpoint to get questions based on category.
 
     TEST: In the "List" tab / main screen, clicking on one of the
@@ -190,7 +190,7 @@ def create_app(test_config=None):
         return questions(category_id)
 
     '''
-    @TODO:
+    @DONE:
     Create a POST endpoint to get questions to play the quiz.
     This endpoint should take category and previous question parameters
     and return a random questions within the given category,
@@ -233,7 +233,7 @@ def create_app(test_config=None):
             return jsonify({})
 
     '''
-    @TODO:
+    @DONE:
     Create error handlers for all expected errors
     including 404 and 422.
     '''
@@ -260,5 +260,13 @@ def create_app(test_config=None):
             'error': str(error),
             'message': 'unprocessable entity',
         }), 422
+    
+    @app.errorhandler(500)
+    def internal_server_error(error):
+        return jsonify({
+            'success': False,
+            'error': str(error),
+            'message': 'internal server error',
+        }), 500
 
     return app
